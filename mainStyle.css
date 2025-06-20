@@ -104,6 +104,7 @@ body{
 }
 #tutor{
     display: flex;
+    box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.418);
 }
 #tutor img{
     width: 90px;
