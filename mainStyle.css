@@ -1,0 +1,116 @@
+*{
+    margin: 0;
+}
+.itens{
+    width: 150px;
+    height: 120px;
+    border-radius: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
+    justify-content: center;
+    text-align: center;
+    
+}
+body{
+    background-color: #A7D8F1;
+}
+.linha{
+    margin-top: 10px;
+    display: flex;
+    height: auto;
+    text-align: center;
+    justify-content: center;
+}
+#remedios{
+    background-color: #3DA9FC;
+}
+.main{
+    width: 100%;
+    height: 100px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+.heart{
+    width: 90px;
+    height: 80px;
+}
+.text{
+    width: 200px;
+    height: 80px;
+}
+.content{
+    width: 100%;
+    height: auto;
+    background-color: #4bc0ff;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+.content h3{
+    color: #061f33;
+    font-size: 25px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.itens img{
+    width: 100px;
+    height: 150px;
+    position: relative;
+    margin-top: -20px;
+}
+.itens h3{
+    position: absolute;
+    margin-top: -45px;
+    margin-left: 20px;
+    color: #061f33;
+    font-size: 25px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+#consultas{
+    background-color: #FFFFFF;
+}
+#tarefas{
+    background-color: #E8F8E1;
+}
+#saude{
+    background-color: #FFF8DC;
+}
+#info{
+    background-color: #A5EBD0;
+}
+#contato{
+    background-color: #EB4D40;
+}
+#contato img{
+    height: 90px;
+    width: 80px;
+    margin-top: 8px;
+}
+#contato h3{
+    margin-top: -15px;
+    margin-left: 10px;
+}
+#info h3{
+    margin-left: 10px;
+    margin-top: -50px;   
+}
+#tutor{
+    margin-top: 10px;
+    width: 100%;
+    height: 90px;
+    background-color: #E8F8E1;
+    border-radius: 20px;
+}
+#tutor{
+    display: flex;
+}
+#tutor img{
+    width: 90px;
+    height: 90px;
+    margin-left: 10px;
+}
+#tutor h2{
+    margin-top: 15px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
