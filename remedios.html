@@ -41,7 +41,9 @@
                                             <option value="liquido">Líquido (Soluções, xaropes, etc...)</option>
                                             <option value="semisolido">Semi-sólido (Pomadas, cremes, etc...)</option>
                                             <option value="gasoso">Gasoso (Aerossóis, etc...)</option>
-                                        </select>
+                                        </select><br>
+                                        <input type="text" placeholder="" class="medInputs">
+                                        
                                     </div>
                                     </div>
                             <div class="modal-footer">
@@ -59,6 +61,30 @@
     </main>
     <footer></footer>
 </body>
+<script>
+  const imageInput = document.getElementById('imageInput');
+  const previewImage = document.getElementById('previewImage');
+
+  imageInput.addEventListener('change', function() {
+    const file = this.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.addEventListener('load', function() {
+        previewImage.setAttribute('src', this.result);
+        previewImage.style.display = 'block';
+      });
+
+      reader.readAsDataURL(file);
+    } else {
+      previewImage.style.display = 'none';
+      previewImage.setAttribute('src', '#');
+      previewImage.style.width = "100px";
+      previewImage.style.height = "100px";
+    }
+  });
+</script>
 <script src="remediosScript.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
