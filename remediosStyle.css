@@ -1,0 +1,26 @@
+body{
+    
+}
+.imgIn label{
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+.imgIn{
+    margin-bottom: 50px;
+    border-style: dashed;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+.infoIn{
+    
+}
+#medType{
+    width: 200px;
+    height: 50px;
+    font-size: 20px;
+    
+}
+.medType img{
+    width: 50px;
+    height: 50px;
+}
