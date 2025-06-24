@@ -42,8 +42,15 @@
                                             <option value="semisolido">Semi-sólido (Pomadas, cremes, etc...)</option>
                                             <option value="gasoso">Gasoso (Aerossóis, etc...)</option>
                                         </select><br>
-                                        <input type="text" placeholder="" class="medInputs">
-                                        
+                                       
+                                        <div class="inputs">
+                                            <div class="row" style="display: flex;">
+                                                <div class="boxRmd" id="inNome"></div> <div class="BoxRmd" id="inQnt"></div>
+                                            </div>
+                                            <div class="row" style="display: flex;">
+                                                <div class="boxRmd" id="inTempo"></div> <div class="BoxRmd" id="enviar"></div>
+                                            </div>
+                                        </div>                                        
                                     </div>
                                     </div>
                             <div class="modal-footer">
@@ -71,17 +78,18 @@
     if (file) {
       const reader = new FileReader();
 
-      reader.addEventListener('load', function() {
+        reader.addEventListener('load', function() {
         previewImage.setAttribute('src', this.result);
         previewImage.style.display = 'block';
+        previewImage.style.width = "100px";
+        previewImage.style.height = "100px";
+        previewImage.style.marginLeft = '120px';
       });
 
       reader.readAsDataURL(file);
     } else {
       previewImage.style.display = 'none';
       previewImage.setAttribute('src', '#');
-      previewImage.style.width = "100px";
-      previewImage.style.height = "100px";
     }
   });
 </script>
