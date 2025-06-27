@@ -1,13 +1,15 @@
 
 class novoRemedio {
-  constructor(img, nome, quantidade, horas) {
+  constructor(img, nome, quantidade, horas,tipo) {
     this.img = img;
     this.quantidade = quantidade;
     this.horas = horas;
     this.nome = nome;
+    this.tipo = tipo;
   }
 }
 
+const divLista = document.querySelector('.lista');
 let listaRemedios = JSON.parse(localStorage.getItem('listaRemedios')) || [];
 let imagemBase64 = null; 
 
@@ -92,21 +94,25 @@ inQnt.appendChild(quantidadeH2);
 inQnt.appendChild(quantidadeInput);
 inTempo.appendChild(tempoH2);
 inTempo.appendChild(tempoInput);
-
+let tipoRmd = '';
 mdTypeSelect.addEventListener("click", () => {
   let valor = mdTypeSelect.value;
 
   switch (valor) {
     case "liquido":
       quantidadeInput.setAttribute("placeHolder", "Ex.: 30 (30ml)");
+      tipoRmd = valor;
       break;
     case "solido":
+      tipoRmd = valor;
       quantidadeInput.setAttribute("placeHolder", "Ex.: 3 (3 pílulas)");
       break;
     case "semisolido":
+      tipoRmd = valor;
       quantidadeInput.setAttribute("placeHolder", "Ex.: 20 (20g)");
       break;
     case "gasoso":
+      tipoRmd = valor;
       quantidadeInput.setAttribute("placeHolder", "Ex.: 40 (40ml (Spray))");
       break;
     default:
@@ -120,8 +126,36 @@ botaoEnviar.addEventListener('click', () => {
   const quantidadeRemedio = document.getElementById('quantidadeRemedio').value;
   const tempoRemedio = document.getElementById('tempoRemedio').value;
   const imgRemedio = imagemBase64 || imagemSalva;
+ 
+  let medidaRemedio = '';
+  if(tipoRmd == 'solido'){
+    medidaRemedio = ' comprimidos';
+  }else if(tipoRmd == 'liquido'){
+    medidaRemedio = ' ml';
+  }else if(tipoRmd == 'semisolido'){
+    medidaRemedio = ' g';
+  }else if(tipoRmd == 'gasoso'){
+    medidaRemedio = ' ml (Spray)';
+  }
 
-  let remedio = new novoRemedio(imgRemedio, nomeRemedio, quantidadeRemedio, tempoRemedio);
+  
+  let divNovoRemedio = document.createElement('div');
+  let divInfo = document.createElement('div');
+  divInfo.classList.add('info');
+  divNovoRemedio.classList.add('item');
+  divLista.appendChild(divNovoRemedio);
+  let imgItem = document.createElement('img');
+  let h2NomeDiv = document.createElement('h2')
+  let h2InfoDiv = document.createElement('h2')
+  h2NomeDiv.textContent = nomeRemedio;
+  h2InfoDiv.textContent = `${quantidadeRemedio}${medidaRemedio} de ${tempoRemedio} em ${tempoRemedio}`;
+  imgItem.setAttribute('src',imgRemedio)
+  divNovoRemedio.appendChild(imgItem);
+  divNovoRemedio.appendChild(divInfo);
+  divInfo.appendChild(h2NomeDiv);
+  divInfo.appendChild(h2InfoDiv);
+
+  let remedio = new novoRemedio(imgRemedio, nomeRemedio, quantidadeRemedio, tempoRemedio,tipoRmd);
   listaRemedios.push(remedio);
   localStorage.setItem('listaRemedios', JSON.stringify(listaRemedios));
 
@@ -135,6 +169,13 @@ botaoEnviar.addEventListener('click', () => {
   localStorage.removeItem("imagemMedicamento");
 
   mdTypeSelect.selectedIndex = 0;
+
+
+ 
+
+
+
+
 });
 
 console.log(listaRemedios);

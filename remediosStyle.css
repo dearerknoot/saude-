@@ -44,6 +44,32 @@ body{
     margin-top: 50px;
 }
 
-.nomeRemedio{
-    
+.item {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  width: 90%;
+  height: auto;
+  padding: 10px;
+  border: #061f33 solid 5px;
+  border-radius: 20px;
+  margin-left: 20px;
+  gap: 10px;
+  background-color: white;
+}
+
+.item img {
+  width: 120px;
+  height: 120px;
+}
+
+.item .info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.info h2{
+    font-weight: 700;
 }
