@@ -126,7 +126,24 @@ botaoEnviar.addEventListener('click', () => {
   const quantidadeRemedio = document.getElementById('quantidadeRemedio').value;
   const tempoRemedio = document.getElementById('tempoRemedio').value;
   const imgRemedio = imagemBase64 || imagemSalva;
- 
+  let validar = false;
+  if(nomeRemedio.match(/[0-9]/) || nomeRemedio == ""){
+    if(nomeRemedio == ""){
+      alert("Digite um nome para o medicamento.")
+    }else{
+      alert('Escreva um nome com apenas letras.')
+    }
+    
+  }else if(isNaN(parseInt(quantidadeRemedio))){
+    alert('Digite um número na quantidade do medicamento.')
+  }else if(isNaN(parseInt(tempoRemedio))){
+    alert('Digite um número no tempo do medicamento')
+  }else if((!imagemBase64 || imagemBase64 === "") && (!imagemSalva || imagemSalva === "")){
+    alert("Tire uma foto do seu medicamento.")
+  }else{
+    validar = true;
+  }
+  if(validar){
   let medidaRemedio = '';
   if(tipoRmd == 'solido'){
     medidaRemedio = ' comprimidos';
@@ -145,15 +162,18 @@ botaoEnviar.addEventListener('click', () => {
   divNovoRemedio.classList.add('item');
   divLista.appendChild(divNovoRemedio);
   let imgItem = document.createElement('img');
-  let h2NomeDiv = document.createElement('h2')
-  let h2InfoDiv = document.createElement('h2')
+  let h2NomeDiv = document.createElement('h2');
+  let h2InfoDiv = document.createElement('h2');
+  
   h2NomeDiv.textContent = nomeRemedio;
-  h2InfoDiv.textContent = `${quantidadeRemedio}${medidaRemedio} de ${tempoRemedio} em ${tempoRemedio}`;
-  imgItem.setAttribute('src',imgRemedio)
+  h2InfoDiv.textContent = `${quantidadeRemedio}${medidaRemedio} de ${tempoRemedio} em ${tempoRemedio} horas`;
+  imgItem.setAttribute('src',imgRemedio);
   divNovoRemedio.appendChild(imgItem);
   divNovoRemedio.appendChild(divInfo);
   divInfo.appendChild(h2NomeDiv);
   divInfo.appendChild(h2InfoDiv);
+
+
 
   let remedio = new novoRemedio(imgRemedio, nomeRemedio, quantidadeRemedio, tempoRemedio,tipoRmd);
   listaRemedios.push(remedio);
@@ -170,13 +190,67 @@ botaoEnviar.addEventListener('click', () => {
 
   mdTypeSelect.selectedIndex = 0;
 
+  window.location.reload()
 
  
+}});
 
 
+ 
+function renderizarRemediosSalvos() {
+  listaRemedios.forEach(remedio => { // pega todos os itens do array de objetos do local storage e refaz o processo toda vez que a pagina recarrega em forma de function
+    let medidaRemedio = '';
+    switch (remedio.tipo) {
+      case 'solido':
+        medidaRemedio = ' comprimidos';
+        break;
+      case 'liquido':
+        medidaRemedio = ' ml';
+        break;
+      case 'semisolido':
+        medidaRemedio = ' g';
+        break;
+      case 'gasoso':
+        medidaRemedio = ' ml (Spray)';
+        break;
+    }
+
+    let divNovoRemedio = document.createElement('div');
+    let divInfo = document.createElement('div');
+    divInfo.classList.add('info');
+    divNovoRemedio.classList.add('item');
+    divLista.appendChild(divNovoRemedio);
+
+    let imgItem = document.createElement('img');
+    imgItem.setAttribute('src', remedio.img);
+
+    let h2NomeDiv = document.createElement('h2');
+    h2NomeDiv.textContent = remedio.nome;
+
+    let h2InfoDiv = document.createElement('h2');
+    h2InfoDiv.textContent = `${remedio.quantidade}${medidaRemedio} de ${remedio.horas} em ${remedio.horas} horas`;
+
+    divNovoRemedio.appendChild(imgItem);
+    divNovoRemedio.appendChild(divInfo);
+    divInfo.appendChild(h2NomeDiv);
+    divInfo.appendChild(h2InfoDiv);
+    let botaoRemover = document.createElement('img');
+    botaoRemover.setAttribute('src', 'images/X.png');
+    botaoRemover.style.width = '60px';
+    botaoRemover.style.height = '60px';
+    divNovoRemedio.appendChild(botaoRemover);
 
 
-});
+    botaoRemover.onclick = ()=>{
+      localStorage.removeItem(remedio);
+      window.location.reload();
+    }
+  });
+}
+
+
+renderizarRemediosSalvos();
 
 console.log(listaRemedios);
-// localStorage.clear();
+
+localStorage.clear();
