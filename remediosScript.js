@@ -117,7 +117,7 @@ mdTypeSelect.addEventListener("change", () => {
       quantidadeInput.setAttribute("placeHolder", "Ex.: 40 (40ml (Spray))");
       break;
     default:
-      alert("Houve um erro, já estamos resolvendo");
+      alert("Houve um erro, selecione uma das opções.");
       tipoRmd =  ""
       break;
   }
@@ -207,7 +207,7 @@ function renderizarRemediosSalvos() {
 
   listaRemedios.forEach(remedio => { // pega todos os itens do array de objetos do local storage e refaz o processo toda vez que a pagina recarrega em forma de function
     let index = listaRemedios.indexOf(remedio);
-    let medidaRemedio = '';
+    let medidaRemedio = ' comprimidos';
     switch (remedio.tipo) {
       case 'solido':
         medidaRemedio = ' comprimidos';
@@ -234,6 +234,7 @@ function renderizarRemediosSalvos() {
 
     let h2NomeDiv = document.createElement('h2');
     h2NomeDiv.textContent = remedio.nome;
+    h2NomeDiv.style.fontWeight = '700'
 
     let h2InfoDiv = document.createElement('h2');
     h2InfoDiv.textContent = `${remedio.quantidade}${medidaRemedio} de ${remedio.horas} em ${remedio.horas} horas`;
@@ -244,8 +245,7 @@ function renderizarRemediosSalvos() {
     divInfo.appendChild(h2InfoDiv);
     let botaoRemover = document.createElement('img');
     botaoRemover.setAttribute('src', 'images/X.png');
-    botaoRemover.style.width = '60px';
-    botaoRemover.style.height = '60px';
+    botaoRemover.classList.add('botao-remover');
     divNovoRemedio.appendChild(botaoRemover);
 
 
@@ -262,5 +262,5 @@ function renderizarRemediosSalvos() {
 
 renderizarRemediosSalvos();
 
-
+console.log(listaRemedios);
 
