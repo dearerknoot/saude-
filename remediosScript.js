@@ -95,7 +95,8 @@ inQnt.appendChild(quantidadeInput);
 inTempo.appendChild(tempoH2);
 inTempo.appendChild(tempoInput);
 let tipoRmd = '';
-mdTypeSelect.addEventListener("click", () => {
+let validarTipo = false;
+mdTypeSelect.addEventListener("change", () => {
   let valor = mdTypeSelect.value;
 
   switch (valor) {
@@ -117,7 +118,8 @@ mdTypeSelect.addEventListener("click", () => {
       break;
     default:
       alert("Houve um erro, já estamos resolvendo");
-      return;
+      tipoRmd =  ""
+      break;
   }
 });
 
@@ -154,6 +156,10 @@ botaoEnviar.addEventListener('click', () => {
   }else if(tipoRmd == 'gasoso'){
     medidaRemedio = ' ml (Spray)';
   }
+  if (!tipoRmd) {
+  alert("Selecione o tipo de medicamento.");
+  return;
+}
 
   
   let divNovoRemedio = document.createElement('div');
@@ -198,7 +204,9 @@ botaoEnviar.addEventListener('click', () => {
 
  
 function renderizarRemediosSalvos() {
+
   listaRemedios.forEach(remedio => { // pega todos os itens do array de objetos do local storage e refaz o processo toda vez que a pagina recarrega em forma de function
+    let index = listaRemedios.indexOf(remedio);
     let medidaRemedio = '';
     switch (remedio.tipo) {
       case 'solido':
@@ -241,9 +249,12 @@ function renderizarRemediosSalvos() {
     divNovoRemedio.appendChild(botaoRemover);
 
 
-    botaoRemover.onclick = ()=>{
-      localStorage.removeItem(remedio);
-      window.location.reload();
+    botaoRemover.onclick = () => {
+      if (index > -1) { //pega o indice que o remedio esta no listaRemedios para remove-lo e depois recarregar a página.
+        listaRemedios.splice(index, 1);
+        localStorage.setItem('listaRemedios', JSON.stringify(listaRemedios));
+        window.location.reload();
+      }
     }
   });
 }
@@ -251,6 +262,5 @@ function renderizarRemediosSalvos() {
 
 renderizarRemediosSalvos();
 
-console.log(listaRemedios);
 
-localStorage.clear();
+
