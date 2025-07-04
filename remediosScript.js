@@ -178,6 +178,19 @@ botaoEnviar.addEventListener('click', () => {
   divNovoRemedio.appendChild(divInfo);
   divInfo.appendChild(h2NomeDiv);
   divInfo.appendChild(h2InfoDiv);
+  let botaoRemover = document.createElement('img');
+    botaoRemover.setAttribute('src', 'images/X.png');
+    botaoRemover.classList.add('botao-remover');
+    divNovoRemedio.appendChild(botaoRemover);
+
+
+    botaoRemover.onclick = () => {
+      if (index > -1) { //pega o indice que o remedio esta no listaRemedios para remove-lo e depois recarregar a página.
+        listaRemedios.splice(index, 1);
+        localStorage.setItem('listaRemedios', JSON.stringify(listaRemedios));
+        window.location.reload();
+      }
+    }
 
 
 
