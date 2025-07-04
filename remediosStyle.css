@@ -89,8 +89,8 @@ body{
   position: absolute;
   top: 5px;
   right: 5px;
-  /* cursor: pointer; */
   z-index: 10;
+  pointer-events: all;
 }
 
 @media (max-width: 600px) {
