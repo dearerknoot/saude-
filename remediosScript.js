@@ -244,15 +244,6 @@ let imagemBase64 = null;
 const imageInput = document.getElementById("imageInput");
 const previewImage = document.getElementById("previewImage");
 
-
-if (imagemSalva) {
-  previewImage.setAttribute("src", imagemSalva);
-  previewImage.style.display = "block";
-  previewImage.style.width = "100px";
-  previewImage.style.height = "100px";
-  previewImage.style.marginLeft = "120px";
-}
-
 imageInput.addEventListener("change", function () {
   const file = this.files[0];
 
@@ -344,7 +335,7 @@ mdTypeSelect.addEventListener("change", () => {
       break;
     default:
       alert("Houve um erro, selecione uma das opções.");
-      tipoRmd =  ""
+      tipoRmd = "";
       break;
   }
 });
@@ -359,16 +350,16 @@ botaoEnviar.addEventListener('click', () => {
 
   if(nomeRemedio.match(/[0-9]/) || nomeRemedio == ""){
     if(nomeRemedio == ""){
-      alert("Digite um nome para o medicamento.")
+      alert("Digite um nome para o medicamento.");
     }else{
-      alert('Escreva um nome com apenas letras.')
+      alert('Escreva um nome com apenas letras.');
     }
   } else if(isNaN(parseInt(quantidadeRemedio))){
-    alert('Digite um número na quantidade do medicamento.')
+    alert('Digite um número na quantidade do medicamento.');
   } else if(isNaN(parseInt(tempoRemedio))){
-    alert('Digite um número no tempo do medicamento')
+    alert('Digite um número no tempo do medicamento.');
   } else if((!imagemBase64 || imagemBase64 === "") && (!imagemSalvaAtual || imagemSalvaAtual === "")){
-    alert("Tire uma foto do seu medicamento.")
+    alert("Tire uma foto do seu medicamento.");
   } else {
     validar = true;
   }
@@ -439,7 +430,6 @@ function renderizarRemediosSalvos() {
     botaoRemover.classList.add('botao-remover');
     botaoRemover.style.cursor = 'pointer';
 
-    // ✅ CORREÇÃO: uso de addEventListener e index do loop
     botaoRemover.addEventListener('click', () => {
       listaRemedios.splice(index, 1);
       localStorage.setItem('listaRemedios', JSON.stringify(listaRemedios));
@@ -448,7 +438,6 @@ function renderizarRemediosSalvos() {
 
     divInfo.appendChild(h2NomeDiv);
     divInfo.appendChild(h2InfoDiv);
-
     divNovoRemedio.appendChild(imgItem);
     divNovoRemedio.appendChild(divInfo);
     divNovoRemedio.appendChild(botaoRemover);
