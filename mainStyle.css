@@ -10,6 +10,7 @@
     justify-content: center;
     text-align: center;
     box-shadow: 10px 5px 5px rgba(0, 0, 0, 0.418);
+    animation: slideDown 1s ease;
 }
 body{
     background-color: #A7D8F1;
@@ -39,10 +40,12 @@ body{
 .heart{
     width: 90px;
     height: 80px;
+    animation: slideDown 1s ease;
 }
 .text{
     width: 200px;
     height: 80px;
+    animation: slideDown 1s ease;
 }
 .content{
     width: 100%;
@@ -50,6 +53,7 @@ body{
     background-color: #4bc0ff;
     justify-content: center;
     text-align: center;
+    animation: slideDown 1s ease;
     align-items: center;
 }
 .content h3{
@@ -73,18 +77,27 @@ body{
 }
 #consultas{
     background-color: #FFFFFF;
+    text-align: center;
+    animation: slideDown 1s ease;
+}
+#consultas h3{
+    margin-left: 30px;
 }
 #tarefas{
     background-color: #E8F8E1;
+    animation: slideDown 1s ease;
 }
 #saude{
     background-color: #FFF8DC;
+    animation: slideDown 1s ease;
 }
 #info{
     background-color: #A5EBD0;
+    animation: slideDown 1s ease;
 }
 #contato{
     background-color: #EB4D40;
+    animation: slideDown 1s ease;
 }
 #contato img{
     height: 90px;
@@ -105,6 +118,7 @@ body{
     height: 90px;
     background-color: #E8F8E1;
     border-radius: 20px;
+    animation: slideDown 3s ;
 }
 #tutor{
     display: flex;
@@ -139,12 +153,13 @@ body{
     width: 320px;
     height: 90px;
     margin-top: 5px;
-    ;
+    animation: slideDown  1s ease;
 }
 .voltarIMG{
     margin-top: 10px;
     width: 80px;
     height: 80px;
+    animation: slideDown  1s ease;
 }
 .infoMED{
     background-color: #4bc0ff;
@@ -158,10 +173,15 @@ body{
     box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.418);
     text-align: center;
     justify-content: center;
+    animation: slideDown  3s ease;
 }
 .infoMED h2{
     margin-top: 10px;
 }
 .form-check form-switch{
     justify-content: center;
+}
+@keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
 }

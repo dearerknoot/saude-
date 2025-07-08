@@ -1,16 +1,298 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="stylecalendario.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #4ea8de;
+      animation: fadeInBody 1s ease-in;
+      text-align: center;
+    }
+    .calendar {
+      background-color: white;
+      border-radius: 15px;
+      padding: 20px;
+      width: 400px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+      animation: slideDown 1s ease;
+      
+    }
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .calendar-header span {
+      font-size: 22px;
+      font-weight: bold;
+    }
+    .calendar-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+    }
+    .day {
+      height: 45px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f1f9ff;
+      border-radius: 5px;
+      cursor: pointer;
+      position: relative;
+      transition: background-color 0.3s, transform 0.3s;
+    }
+    .day:hover {
+      background-color: #cde8ff;
+      transform: scale(1.05);
+    }
+    .day.has-task {
+      background-color: #4ea8de;
+      color: white;
+      font-weight: bold;
+    }
+    .modal {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      display: none;
+      z-index: 999;
+      width: 90%;
+      max-width: 400px;
+      animation: fadeInModal 0.3s ease;
+    }
+    .modal input, .modal textarea {
+      width: 100%;
+      margin-top: 10px;
+      padding: 12px;
+      font-size: 18px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .modal button {
+      margin-top: 15px;
+      padding: 14px;
+      font-size: 18px;
+      background-color: #4ea8de;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s;
+    }
+    .modal button:hover {
+      background-color: #0077b6;
+    }
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      z-index: 998;
+    }
+    button {
+      font-size: 22px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #4ea8de;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #0077b6;
+    }
+    @keyframes slideDown {
+      from { transform: translateY(-20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes fadeInModal {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+   
+    .logo img{
+        width: 100px;
+        height: 100px;
+        margin-left: 10px;
+        margin-top: 10px;
+        animation: slideDown 1s ease;
+    }
+    .logo{
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        margin-bottom: 10px;
+        animation: slideDown 1s ease;
+    }
+    #texto{
+        width: 300px;
+        height: 150px;
+        margin-left: 30px;
+        animation: slideDown 1s ease;
+    }
+    .back{
+        width: 140px;
+        height: 140px;
+        margin-left: 8px;
+        margin-top: 20px;
+        animation: slideDown 3s ease;
+    }
+    #kiko{
+        width: 210px;
+        height: 220px;
+    }
+    #main{
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+    }
+  </style>
 </head>
-
 <body>
-    <div id="calendar"></div>
-    
+
+<div class="logo">
+    <img src="/images/calendarioHrt.png" alt="">
+    <img src="/images/Agenda.png" id="texto">
+</div>
+<main id="main">
+    <div class="calendar">
+        <div class="calendar-header">
+            <button id="prev-month">&#8592;</button>
+            <span id="month-year"></span>
+            <button id="next-month">&#8594;</button>
+        </div>
+        <div class="calendar-days" id="calendar-days"></div>
+    </div>
+</main>
+
+
+<div class="overlay" id="overlay"></div>
+<div class="modal" id="task-modal">
+  <h3>Adicionar Tarefa</h3>
+  <img src="/images/kikoAgenda.png" id="kiko">
+  <input type="time" id="task-time" />
+  <textarea id="task-desc" rows="3" placeholder="Descrição..."></textarea>
+  <button id="save-task">Salvar</button>
+</div>
+<footer style="width: 100%;">
+    <img src="/images/voltarIMG.png" class="back">
+
+</footer>
+
+<script>
+    const voltar = document.querySelector('.back');
+    voltar.addEventListener('click',()=>{
+        window.location.href = 'index.html';
+    });
+  const monthYear = document.getElementById("month-year");
+  const calendarDays = document.getElementById("calendar-days");
+  const prevMonthBtn = document.getElementById("prev-month");
+  const nextMonthBtn = document.getElementById("next-month");
+  const modal = document.getElementById("task-modal");
+  const overlay = document.getElementById("overlay");
+  const saveTaskBtn = document.getElementById("save-task");
+  const taskTime = document.getElementById("task-time");
+  const taskDesc = document.getElementById("task-desc");
+
+  let currentDate = new Date();
+  let selectedDate = null;
+
+  function renderCalendar() {
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    const firstDay = new Date(year, month, 1).getDay();
+    const lastDate = new Date(year, month + 1, 0).getDate();
+
+    monthYear.textContent = `${currentDate.toLocaleDateString("pt-BR", { month: "long" })} ${year}`;
+    calendarDays.innerHTML = "";
+
+    for (let i = 0; i < firstDay; i++) {
+      const empty = document.createElement("div");
+      calendarDays.appendChild(empty);
+    }
+
+    for (let day = 1; day <= lastDate; day++) {
+      const dayDiv = document.createElement("div");
+      dayDiv.classList.add("day");
+      dayDiv.textContent = day;
+
+      const key = `${year}-${month + 1}-${day}`;
+      if (localStorage.getItem(key)) {
+        dayDiv.classList.add("has-task");
+      }
+
+      dayDiv.addEventListener("click", () => {
+        selectedDate = key;
+        const storedData = JSON.parse(localStorage.getItem(key));
+        taskTime.value = storedData?.time || "";
+        taskDesc.value = storedData?.desc || "";
+        modal.style.display = "block";
+        overlay.style.display = "block";
+      });
+
+      calendarDays.appendChild(dayDiv);
+    }
+  }
+
+  saveTaskBtn.addEventListener("click", () => {
+    if (selectedDate) {
+      const task = taskDesc.value.trim();
+      const time = taskTime.value.trim();
+
+      if (task || time) {
+        localStorage.setItem(selectedDate, JSON.stringify({ time, desc: task }));
+      } else {
+        localStorage.removeItem(selectedDate);
+      }
+
+      modal.style.display = "none";
+      overlay.style.display = "none";
+      renderCalendar();
+    }
+  });
+
+  overlay.addEventListener("click", () => {
+    modal.style.display = "none";
+    overlay.style.display = "none";
+  });
+
+  prevMonthBtn.onclick = () => {
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    renderCalendar();
+  };
+
+  nextMonthBtn.onclick = () => {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    renderCalendar();
+  };
+
+  renderCalendar();
+</script>
+
 </body>
-<script src="scriptCalendario.js"></script>
 </html>
