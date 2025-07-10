@@ -30,68 +30,8 @@ header#head {
     margin-right: 10px;
 }
 
-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-}
 
-.garrafa-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 90vw;
-    max-width: 340px;
-    height: 100px;
-    margin-bottom: 20px;
-}
 
-.garrafa {
-    width: calc(100% - 40px);
-    height: 100px;
-    border: 6px solid #7ed6f9;
-    border-radius: 50px;
-    box-sizing: border-box;
-    overflow: hidden;
-    background-color: transparent;
-    position: relative;
-}
-
-.agua {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #7ed6f9;
-}
-
-.tampa {
-    width: 30px;
-    height: 50px;
-    background-color: #3498db;
-    border-radius: 8px;
-    
-}
-
-.buttons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
-}
-
-.buttons img {
-    width: 90px;
-    height: 90px;
-    cursor: pointer;
-}
-.buttons h2{
-    margin-left: 30px;
-    font-weight: 1000;
-    font-size: 30px;
-}
 
     </style>
 </head>
@@ -103,17 +43,11 @@ main {
     </header>
 
     <main>
-        <div class="garrafa-container">
-            <div class="garrafa">
-                <div class="agua"></div>
+        <section id="boxTarefas">
+            <div class="tarefa">
+                <input type="checkbox" class="check">
             </div>
-            <div class="tampa"></div>
-        </div><br>
-        <div class="buttons">
-            <img src="images/diminuir.png" alt="">
-            <h2>Faltam: x copos</h2>
-            <img src="images/aumentar.png" alt="">
-        </div>
+        </section>
     </main>
 </body>
 
