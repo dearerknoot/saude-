@@ -85,17 +85,14 @@
   }
 
   .progresso {
-      width: 0px;
-      height: 20px;
       border-radius: 20px;
       background-color: rgb(0, 140, 255);
-      animation: tomarAgua 3s linear;
+      height: 20px;
+      width: 0%;
+      background-color: rgb(0, 140, 255);
+      border-radius: 20px;
+      transition: width 1s linear;
   }
-  @keyframes tomarAgua{
-        from{
-            width: 0%;
-        }
-        to {
-            width: 100%;
-        }
-  }
+
+
+  

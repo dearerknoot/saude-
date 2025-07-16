@@ -40,14 +40,12 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="barra">
-                                <div class="progresso">
-
-                                </div>
+                            <div style="width: 100%; background-color: gray; border-radius: 20px;">
+                                <div class="progresso" id="barra"></div>
                             </div>
-                             <label>Digite um valor (0 a 100):</label>
-  <input type="number" id="valor" min="0" max="100">
-  <button onclick="atualizarProgresso()">Atualizar</button>
+                            <label>Digite um valor (0 a 100):</label>
+                            <input type="number" id="valor" min="0" max="100">
+                            <button onclick="atualizarBarra()">Atualizar</button>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -59,18 +57,8 @@
         </section>
     </main>
 </body>
-  <script>
-    function atualizarProgresso() {
-      const valor = document.getElementById('valor').value;
-      const barra = document.getElementById('barra');
-
-      if (valor >= 0 && valor <= 100) {
-        barra.style.width = valor + '%';
-      } else {
-        alert("Insira um valor entre 0 e 100.");
-      }
-    }
-  </script>
+<script>
+</script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>
@@ -80,5 +68,23 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
     crossorigin="anonymous"></script>
+<script>
+    const back = document.querySelector('.back');
+    back.addEventListener('click',()=>{
+        window.location.href = 'index.html';
+    })
+    function atualizarBarra() {
+        const input = document.getElementById("valor");
+        const barra = document.getElementById("barra");
+        let valor = parseInt(input.value);
+
+        
+        if (isNaN(valor)) valor = 0;
+        if (valor < 0) valor = 0;
+        if (valor > 100) valor = 100;
+
+        barra.style.width = valor + "%";
+    }
+</script>
 
 </html>

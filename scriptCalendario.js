@@ -131,3 +131,7 @@ setInterval(() => {
   const formattedTime = new Intl.DateTimeFormat('pt-BR', option).format(timer);
   todayShowTime.textContent = formattedTime;
 }, 1000);
+
+
+
+
