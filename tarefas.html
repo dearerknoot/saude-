@@ -42,19 +42,20 @@
                             <div style="width: 100%; background-color: gray; border-radius: 20px;">
                                 <div class="progresso" id="barra"></div>
                             </div>
-                            <h4 id="quantidade">0ml/2000ml</h4>
+                            <h4 id="quantidade">0ml/3000ml</h4>
                             <h4>Quantos copos de água você tomou hoje? (Considere o copo como 200 ml):</h4>
-                            <input type="number" id="valor" min="0" max="100">
+                            <input type="number" id="valor" min="0" max="20">
                             <button onclick="atualizarBarra()">Atualizar</button>
+                            <h4 id="desc"></h4>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+        <img src="images/adicionarRemedios.png" id="add">
     </main>
 </body>
 <script>
@@ -70,6 +71,7 @@
     crossorigin="anonymous"></script>
 <script>
     const back = document.querySelector('.back');
+    const desc = document.getElementById('desc');
     back.addEventListener('click',()=>{
         window.location.href = 'index.html';
     })
@@ -77,6 +79,7 @@
         const input = document.getElementById("valor");
         const barra = document.getElementById("barra");
         const quantidade = document.getElementById("quantidade");
+       
         let valor = parseInt(input.value);
 
         if (isNaN(valor)) valor = 0;
@@ -85,12 +88,22 @@
 
         let valorMl = valor * 200;
 
-        let valorPor100 = (valorMl * 100) / 2000;
+        let valorPor100 = (valorMl * 100) / 3000;
 
         barra.style.width = valorPor100 + "%";
-        quantidade.textContent = `${valorMl}ml/2000ml`
-        
+        quantidade.textContent = `${valorMl}ml/3000ml`
+
+        if(valorMl <= 1000){
+            desc.textContent = 'Parece que você tomou pouca água hoje, tome mais!';
+
+        }else if(valorMl >= 1500 && valorMl < 2000){
+            desc.textContent = 'Você se hidratou bem, mas tome mais alguns copos para estar na hidratação ideal!';
+        }else if(valorMl >= 2000 && valorMl <= 3000){
+            desc.textContent = 'Muito bem! Você está perfeitamente hidratado(a).';
+        }else if(valorMl > 3000){
+            desc.textContent = 'É sempre bom estar bem hidratado, mas não exagere!';
+        }
     }
 </script>
-
+<script src="scriptTarefas.js"></script>
 </html>
