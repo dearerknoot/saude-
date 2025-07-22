@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dicas de Saúde para Idosos</title>
+  <title>Document</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -18,16 +18,19 @@
       background-color: #b2ebf2;
       padding: 20px;
       border-radius: 12px;
+      animation: slideDown 3s ease;
     }
 
     .header {
       text-align: center;
       margin-bottom: 20px;
+      animation: slideDown 3s ease;
     }
 
     .header h1 {
       color: #0d47a1;
       font-size: 24px;
+      animation: slideDown 3s ease;
     }
 
     .tip {
@@ -38,25 +41,48 @@
       display: flex;
       align-items: center;
       gap: 15px;
+      animation: slideDown 3s ease;
     }
 
     .tip img {
       width: 30px;
       height: 30px;
+      animation: slideDown 3s ease;
     }
-
+   
     .tip-text {
       color: #01579b;
       font-weight: bold;
+      animation: slideDown 3s ease;
     }
 
+    #img {
+      width: 250px;
+      height: 50px;
+      animation: slideDown 3s ease;
+      margin-top: 5px;
+    }
+    #back {
+      width: 60px;
+      height: 60px;
+      animation: slideDown 3s ease;
+    }
+     @keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+    }
   </style>
 </head>
 <body>
   <div class="container">
+    <div style="display: flex;">
+        <img src="images/voltarIMG.png" id="back" onclick="voltar()">
+        <img src="images/saudeTitle.png" id="img">
+    </div>
+    
     <div class="header">
       <img src="https://img.icons8.com/color/48/heart-with-pulse.png" alt="Saúde">
-      <h1>Dicas de Saúde</h1>
+      
     </div>
 
     <div class="tip">
@@ -70,7 +96,7 @@
     </div>
 
     <div class="tip">
-      <img src="https://img.icons8.com/ios-filled/50/phonograph.png" alt="Música">
+      <img src="https://cdn-icons-png.flaticon.com/512/31/31487.png" alt="Música">
       <div class="tip-text">Escute músicas que você gosta.</div>
     </div>
 
@@ -80,7 +106,7 @@
     </div>
 
     <div class="tip">
-      <img src="https://img.icons8.com/color/48/water-glass.png" alt="Água">
+      <img src="https://png.pngtree.com/png-clipart/20230403/original/pngtree-water-bottle-line-icon-png-image_9022377.png" alt="Água">
       <div class="tip-text">Beba bastante água durante o dia.</div>
     </div>
 
@@ -105,5 +131,10 @@
     </div>
 
   </div>
+  <script>
+    function voltar(){
+      document.location.href = 'index.html';
+    }
+  </script>
 </body>
 </html>

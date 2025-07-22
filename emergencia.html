@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emergência - Saúde+</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #ffeaea;
+      color: #7a0000;
+    }
+
+    .container {
+      padding: 20px;
+      animation: slideDown 3s ease;
+    }
+
+    h1 {
+      color: #7a0000;
+    }
+
+    .alerta {
+      background-color: #ffc3c3;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: bold;
+      animation: slideDown 3s ease;
+    }
+
+    button {
+      background-color: #8b0000;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-bottom: 10px;
+      animation: slideDown 3s ease;
+    }
+
+    .contato {
+      background-color: #f0f0f0;
+      border-left: 5px solid #8b0000;
+      border-radius: 8px;
+      padding: 10px;
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      animation: slideDown 3s ease;
+    }
+
+    .contato strong {
+      display: block;
+      font-size: 16px;
+      animation: slideDown 3s ease;
+    }
+
+    .contato small {
+      color: #555;
+      animation: slideDown 3s ease;
+    }
+
+    .contato button {
+      background-color: #ff6b6b;
+      padding: 6px 10px;
+      font-size: 14px;
+      animation: slideDown 3s ease;
+    }
+
+    /* Modal */
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    
+    #title {
+      width: 250px;
+      height: 70px;
+      animation: slideDown 3s ease;
+    }
+    #back{
+      width: 60px;
+      height: 60px;
+      animation: slideDown 3s ease;
+    }
+    @keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div style="display: flex;">
+        <img src="images/backEmg.png" id="back" onclick="voltar()">
+        <img src="images/emergenciaTitle.png" id="title">
+    </div>
+    <div class="alerta">
+      Ligue imediatamente se estiver em uma emergência!
+    </div>
+
+    <button onclick="abrirModal()">+ Adicionar Contato</button>
+
+    <div id="listaContatos"></div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h2>Novo Contato</h2>
+      <input type="text" id="nomeContato" placeholder="Nome do contato" />
+      <input type="text" id="telefoneContato" placeholder="Número de telefone" />
+      <button onclick="salvarContato()">Salvar</button>
+    </div>
+  </div>
+
+  <script>
+    const contatosPadrao = [
+      { nome: 'Samu', telefone: '192' },
+      { nome: 'Polícia', telefone: '190' }
+    ];
+
+    let contatos = [];
+
+    function salvarContatos() {
+      localStorage.setItem('contatosEmergencia', JSON.stringify(contatos));
+    }
+
+    function carregarContatos() {
+      const salvos = localStorage.getItem('contatosEmergencia');
+      if (salvos) {
+        try {
+          contatos = JSON.parse(salvos);
+          if (!Array.isArray(contatos) || contatos.some(c => !c.telefone)) {
+            throw new Error(); // força fallback para padrão
+          }
+        } catch {
+          contatos = [...contatosPadrao];
+          salvarContatos();
+        }
+      } else {
+        contatos = [...contatosPadrao];
+        salvarContatos();
+      }
+      renderizarContatos();
+    }
+
+    function renderizarContatos() {
+      const lista = document.getElementById('listaContatos');
+      lista.innerHTML = '';
+
+      contatos.forEach((contato, index) => {
+        const div = document.createElement('div');
+        div.className = 'contato';
+        div.innerHTML = `
+          <div>
+            <strong>${contato.nome}</strong>
+            <small>${contato.telefone}</small>
+          </div>
+          <button onclick="removerContato(${index})">Remover</button>
+        `;
+        lista.appendChild(div);
+      });
+    }
+
+    function abrirModal() {
+      document.getElementById('modal').style.display = 'flex';
+    }
+
+    function fecharModal() {
+      document.getElementById('modal').style.display = 'none';
+      document.getElementById('nomeContato').value = '';
+      document.getElementById('telefoneContato').value = '';
+    }
+
+    function salvarContato() {
+      const nome = document.getElementById('nomeContato').value.trim();
+      const telefone = document.getElementById('telefoneContato').value.trim();
+
+      if (!nome || !telefone) {
+        alert('Preencha todos os campos!');
+        return;
+      }
+
+      contatos.push({ nome, telefone });
+      salvarContatos();
+      renderizarContatos();
+      fecharModal();
+    }
+
+    function removerContato(index) {
+      if (confirm('Deseja remover este contato?')) {
+        contatos.splice(index, 1);
+        salvarContatos();
+        renderizarContatos();
+      }
+    }
+
+    window.onclick = function (event) {
+      if (event.target.id === 'modal') {
+        fecharModal();
+      }
+    };
+    function voltar(){
+        window.location.href = 'index.html';
+    }
+    window.onload = carregarContatos;
+  </script>
+</body>
+</html>
