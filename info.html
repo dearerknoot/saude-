@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Doenças Comuns</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #cdeeff;
+      margin: 0;
+      padding: 0;
+    }
+
+    #back {
+      width: 80px;
+      height: 80px;
+      animation: slideDown 3s ease;
+      animation: slideDown 3s ease;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 500px;
+      margin: auto;
+      animation: slideDown 3s ease;
+    }
+
+    h1 {
+      text-align: center;
+      color: #002b5c;
+      margin-top: -1px;
+      margin-right: 40px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      padding: 15px;
+      margin-bottom: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+      animation: slideDown 3s ease;
+    }
+
+    .card:hover {
+      background: #f0faff;
+      animation: slideDown 3s ease;
+    }
+
+    .card img {
+      width: 30px;
+      vertical-align: middle;
+      margin-right: 10px;
+      animation: slideDown 3s ease;
+    }
+
+    .card-title {
+      font-weight: bold;
+      color: #004080;
+      display: flex;
+      align-items: center;
+      animation: slideDown 3s ease;
+    }
+
+    .info {
+      display: none;
+      margin-top: 10px;
+      font-size: 0.95em;
+      line-height: 1.5;
+    }
+
+    #title {
+      width: 250px;
+      height: 70px;
+      animation: slideDown 3s ease;
+    }
+    @keyframes slideDown {
+    from { transform: translateY(-20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div style="display: flex;">
+      <img src="images/voltarIMG.png" onclick="voltar()" id="back">
+      <img src="images/infoTitle.png" id="title">
+    </div>
+
+    <div class="card" onclick="toggleInfo(this, 'audio/hipertensao.mp3')">
+      <div class="card-title">
+        <img src="https://static.vecteezy.com/system/resources/thumbnails/023/743/931/small/heart-with-electrocardiogram-concept-symbol-of-healthy-lifestyle-and-love-illustration-transparency-png.png" alt="hipertensão">
+        Hipertensão (Pressão Alta)
+      </div>
+      <div class="info">
+        <strong>O que é:</strong> A pressão alta força o sangue contra as artérias.<br>
+        <strong>Sintomas:</strong> Dores de cabeça, visão turva, tontura.<br>
+        <strong>Cuidados:</strong> Alimentação saudável, exercícios e medicação.<br>
+        <strong>Evite:</strong> Sal em excesso, estresse.
+      </div>
+    </div>
+
+    <div class="card" onclick="toggleInfo(this, 'audio/diabetes.mp3')">
+      <div class="card-title">
+        <img src="https://img.icons8.com/color/48/diabetes.png" alt="diabetes">
+        Diabetes Tipo 2
+      </div>
+      <div class="info">
+        <strong>O que é:</strong> Doença que afeta o uso da glicose pelo corpo.<br>
+        <strong>Sintomas:</strong> Sede, fome, fadiga, visão embaçada.<br>
+        <strong>Cuidados:</strong> Dieta equilibrada, exercícios, insulina se necessário.<br>
+        <strong>Evite:</strong> Açúcares simples, sedentarismo.
+      </div>
+    </div>
+
+    <div class="card" onclick="toggleInfo(this, 'audio/osteoporose.mp3')">
+      <div class="card-title">
+        <img src="https://img.freepik.com/free-vector/dogs-need-calcium-strong-teeth-bone-icon-isolated_24877-83449.jpg?semt=ais_hybrid&w=740" alt="osteoporose">
+        Osteoporose
+      </div>
+      <div class="info">
+        <strong>O que é:</strong> Enfraquecimento dos ossos pela perda de massa óssea.<br>
+        <strong>Sintomas:</strong> Fraturas, dor óssea, perda de altura.<br>
+        <strong>Cuidados:</strong> Suplementos de cálcio e vitamina D, exercícios leves.<br>
+        <strong>Evite:</strong> Quedas, sedentarismo.
+      </div>
+    </div>
+
+    <div class="card" onclick="toggleInfo(this, 'audio/alzemr.mp3')">
+      <div class="card-title">
+        <img src="https://img.icons8.com/color/48/brain.png" alt="alzheimer">
+        Alzheimer
+      </div>
+      <div class="info">
+        <strong>O que é:</strong> Doença neurodegenerativa que afeta a memória.<br>
+        <strong>Sintomas:</strong> Esquecimento frequente, confusão mental.<br>
+        <strong>Cuidados:</strong> Estímulo cognitivo e suporte familiar.<br>
+        <strong>Evite:</strong> Isolamento social, falta de rotina.
+      </div>
+    </div>
+
+    <div class="card" onclick="toggleInfo(this, 'audio/asma.mp3')">
+      <div class="card-title">
+        <img src="https://img.icons8.com/color/48/lungs.png" alt="asma">
+        Asma
+      </div>
+      <div class="info">
+        <strong>O que é:</strong> Inflamação das vias respiratórias.<br>
+        <strong>Sintomas:</strong> Falta de ar, chiado no peito, tosse.<br>
+        <strong>Cuidados:</strong> Uso de broncodilatadores e evitar gatilhos.<br>
+        <strong>Evite:</strong> Poeira, fumaça, ar frio.
+      </div>
+    </div>
+
+    <div class="card" onclick="toggleInfo(this, 'audio/hepatite.mp3')">
+      <div class="card-title">
+        <img src="https://img.icons8.com/color/48/liver.png" alt="hepatite">
+        Hepatite
+      </div>
+      <div class="info">
+        <strong>O que é:</strong> Inflamação do fígado causada por vírus ou toxinas.<br>
+        <strong>Sintomas:</strong> Icterícia, cansaço, dor abdominal.<br>
+        <strong>Cuidados:</strong> Repouso, alimentação leve, medicação adequada.<br>
+        <strong>Evite:</strong> Bebidas alcoólicas, medicamentos sem prescrição.
+      </div>
+    </div>
+
+    <div class="card" onclick="toggleInfo(this, 'audio/infarto.mp3')">
+      <div class="card-title">
+        <img src="https://img.icons8.com/color/48/heart-with-pulse--v1.png" alt="infarto">
+        Infarto
+      </div>
+      <div class="info">
+        <strong>O que é:</strong> Interrupção do fluxo de sangue no coração.<br>
+        <strong>Sintomas:</strong> Dor no peito, náusea, suor frio.<br>
+        <strong>Cuidados:</strong> Atendimento imediato, medicamentos e controle de fatores de risco.<br>
+        <strong>Evite:</strong> Tabagismo, estresse, colesterol alto.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function voltar(){
+        window.location.href = 'index.html'
+    }
+    let currentAudio = null;
+
+    function toggleInfo(card, audioSrc) {
+      const info = card.querySelector(".info");
+      const isVisible = info.style.display === "block";
+
+      
+      document.querySelectorAll(".info").forEach(el => el.style.display = "none");
+
+      
+      if (currentAudio && !currentAudio.paused) {
+        currentAudio.pause();
+        currentAudio.currentTime = 0;
+      }
+
+      if (!isVisible) {
+        info.style.display = "block";
+        currentAudio = new Audio(audioSrc);
+        currentAudio.play().catch(err => {
+          console.warn("Clique do usuário necessário para tocar o áudio");
+        });
+      }
+    }
+  </script>
+</body>
+</html>
